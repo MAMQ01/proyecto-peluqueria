@@ -1,9 +1,9 @@
-.navbar-container-carrito{
+.navbar-container-carrito {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.carrito{
+.carrito {
     font-size: 2rem;
 }

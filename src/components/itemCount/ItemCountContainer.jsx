@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { useState, useEffect } from 'react'
-import CounterItems from './ItemCount'
+import ItemCount from './ItemCount'
 
 const CounterItemsContainer = ({ initialStock, initial }) => {
 
@@ -39,7 +39,7 @@ const CounterItemsContainer = ({ initialStock, initial }) => {
     }
 
     return (
-        <CounterItems
+        <ItemCount
             stock={stock}
             counter={counter}
             setCounter={setCounter}

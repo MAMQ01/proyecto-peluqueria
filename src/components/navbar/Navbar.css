@@ -9,12 +9,12 @@
     align-items: center;
 }
 
-.navbar-container-categorias{
+.navbar-container-categorias {
     display: flex;
     justify-items: center;
     gap: 1em;
 }
 
-.categoria{
+.categoria {
     list-style: none;
 }

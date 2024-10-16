@@ -1,5 +1,5 @@
 import './CartWidget.css'
-import {PiShoppingCartSimpleLight} from 'react-icons/pi'
+import { PiShoppingCartSimpleLight } from 'react-icons/pi'
 
 const CartWidget = () => {
     return (

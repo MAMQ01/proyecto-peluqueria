@@ -3,7 +3,7 @@ import './Navbar.css'
 import CartWidget from '../cartWidget/CartWidget'
 
 const Navbar = () => {
-  
+
   return (
     <div className='navbar-container'>
       <div className='navbar-container-logo'>
