@@ -1,18 +1,15 @@
 
-import React from 'react'
 import { useState, useEffect } from 'react'
 import ItemCount from './ItemCount'
 
-const CounterItemsContainer = ({ initialStock, initial }) => {
+const CounterItemsContainer = ({ initialStock, initial = 1, addToCart, product }) => {
 
     const [counter, setCounter] = useState(initial)
     const [stock, setStock] = useState(initialStock)
 
     useEffect(() => {
-        if (stock === 0) {
-            setCounter(0)
-        }
-    }, [stock])
+        setCounter(initial)
+    }, [initial, stock])
 
     const handleDecrease = () => {
         if (counter > 1) {
@@ -28,11 +25,12 @@ const CounterItemsContainer = ({ initialStock, initial }) => {
 
     const handleAddToCart = () => {
         if (counter > 0 && counter <= stock) {
-            updateStock(stock - counter)
+            updateStock(stock) //Todo
+            addToCart({...product,
+                quantity: counter
+            });
         }
-        setCounter(1)
     }
-
 
     const updateStock = (newStock) => {
         setStock(newStock)
@@ -42,7 +40,6 @@ const CounterItemsContainer = ({ initialStock, initial }) => {
         <ItemCount
             stock={stock}
             counter={counter}
-            setCounter={setCounter}
             handleIncrease={handleIncrease}
             handleDecrease={handleDecrease}
             handleAddToCart={handleAddToCart}
