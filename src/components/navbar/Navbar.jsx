@@ -16,7 +16,6 @@ import MenuItem from '@mui/material/MenuItem';
 import StyledLink from '../styledLink/StyledLink';
 
 const pages = [
-  <StyledLink to={"/"}>Todas</StyledLink>,
   <StyledLink to={"/category/cabello"}>Cabello</StyledLink>,
   <StyledLink to={"/category/unyas"}>Uñas</StyledLink>,
   <StyledLink to={"/category/pestanyas"}>Pestañas</StyledLink>,
@@ -38,24 +37,33 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <ContentCutIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            JOHANAILS
-          </Typography>
+          <IconButton sx={{color: 'inherit', display: { xs: 'none', md: 'flex' }}}>
+            <Box
+              component={Link}
+              to={"/"}
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+                color: 'inherit',
+                alignItems: 'center',
+                textDecoration: 'none'
+              }}
+            >
+              <ContentCutIcon sx={{ mr: 1 }} />
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{
+                  mr: 2,
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  textDecoration: 'none',
+                }}
+              >
+                JOHANAILS
+              </Typography>
+            </Box>
+          </IconButton>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -90,7 +98,7 @@ const Navbar = () => {
               ))}
             </Menu>
           </Box>
-          <IconButton component={Link} to={"/"} sx={{color: 'inherit'}} >
+          <IconButton component={Link} to={"/"} sx={{ color: 'inherit' }} >
             <ContentCutIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           </IconButton>
           <Typography
