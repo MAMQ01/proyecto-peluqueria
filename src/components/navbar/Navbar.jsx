@@ -1,7 +1,4 @@
-import { useState } from 'react'
-import CartWidget from '../cartWidget/CartWidget'
-import ContentCutIcon from '@mui/icons-material/ContentCut';
-import { Link } from 'react-router-dom'
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,20 +7,15 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import StyledLink from '../styledLink/StyledLink';
+import ContentCutIcon from '@mui/icons-material/ContentCut';
+import { Link } from 'react-router-dom';
+import CartWidget from '../cartWidget/CartWidget';
 
-const pages = [
-  <StyledLink to={"/category/cabello"}>Cabello</StyledLink>,
-  <StyledLink to={"/category/unyas"}>Uñas</StyledLink>,
-  <StyledLink to={"/category/pestanyas"}>Pestañas</StyledLink>,
-  <StyledLink to={"/category/534534"}>Inexistente</StyledLink>];
+const pages = ['pestanyas', 'unyas', 'cabello'];
 
-const Navbar = () => {
-
-  const [anchorElNav, setAnchorElNav] = useState(null);
+function Navbar() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,37 +29,40 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <IconButton sx={{color: 'inherit', display: { xs: 'none', md: 'flex' }}}>
-            <Box
-              component={Link}
-              to={"/"}
+          {/* Logo para vista de PC (centrado a la izquierda) */}
+          <Box
+            component={Link}
+            to="/"
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              textDecoration: 'none',
+              color: 'inherit',
+              alignItems: 'center',
+            }}
+          >
+            <ContentCutIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
               sx={{
+                mr: 2,
                 display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
                 color: 'inherit',
-                alignItems: 'center',
-                textDecoration: 'none'
+                textDecoration: 'none',
               }}
             >
-              <ContentCutIcon sx={{ mr: 1 }} />
-              <Typography
-                variant="h6"
-                noWrap
-                sx={{
-                  mr: 2,
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  textDecoration: 'none',
-                }}
-              >
-                JOHANAILS
-              </Typography>
-            </Box>
-          </IconButton>
+              LOGO
+            </Typography>
+          </Box>
+
+          {/* Menú hamburguesa para vista móvil */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
-              aria-label="categorias"
+              aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -91,56 +86,71 @@ const Navbar = () => {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages.map((page, index) => (
-                <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Link
+                    to={`/category/${page.toLowerCase()}`}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <IconButton component={Link} to={"/"} sx={{ color: 'inherit' }} >
-            <ContentCutIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          </IconButton>
-          <Typography
-            variant="h5"
-            noWrap
+
+          {/* Logo centrado para móviles y tabletas */}
+          <Box
             component={Link}
             to="/"
             sx={{
-              mr: 2,
               display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
+              color: 'inherit',
+              alignItems: 'center',
+              position: 'absolute', // Absoluto para centrar
+              left: '50%',
+              transform: 'translateX(-50%)', // Ajuste para centrar horizontalmente
             }}
           >
-            JOHANAILS
-          </Typography>
+            <ContentCutIcon sx={{ mr: 1 }} />
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              LOGO
+            </Typography>
+          </Box>
+
+          {/* Menú principal para vista de PC */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page, index) => (
-              <Button
-                key={index}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+            {pages.map((page) => (
+              <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <Link
+                  to={`/category/${page}`}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  <Typography>{page}</Typography>
+                </Link>
+              </MenuItem>
             ))}
           </Box>
+
+          {/* Carrito */}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Ir al carrito">
-              <IconButton sx={{ color: 'inherit', p: 0 }}>
-                <CartWidget />
-              </IconButton>
-            </Tooltip>
+            <CartWidget />
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
