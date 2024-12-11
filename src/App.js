@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FormCheckOut from "./components/form/FormCheckOut";
 import Cart from "./components/cart/Cart";
 import CartContextProvider from './components/context/ContextCart'
+import Body from "./components/body/Body";
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
 
         <Routes>
 
-          <Route path="/" element={<ItemListContainer />} />
+          <Route path="/" element={<Body />} />
 
           <Route path="*" element={<h2>Lo siento esta pagina no existe</h2>} />
 
