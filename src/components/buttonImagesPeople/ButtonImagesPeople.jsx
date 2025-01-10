@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 
-import hombreImg from '../img/hombre.jpg';
-import mujerImg from '../img/mujer.jpg';
+import hombreImg from '../../img/hombre.jpg';
+import mujerImg from '../../img/mujer.jpg';
 
 const images = [
   {
@@ -22,11 +22,28 @@ const images = [
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
+  // Tamaño base (móvil)
   height: 200,
-  [theme.breakpoints.down('sm')]: {
-    width: '100% !important', // Overrides inline-style
-    height: 200,
+  width: '100%',
+
+  // Tablet (sm)
+  [theme.breakpoints.up('sm')]: {
+    height: 250,
+    width: '50%',
   },
+
+  // Desktop (md)
+  [theme.breakpoints.up('md')]: {
+    height: 330,
+    width: '50%',
+  },
+
+  // Large Desktop (lg)
+  [theme.breakpoints.up('lg')]: {
+    height: 395,
+    width: '50%',
+  },
+
   '&:hover, &.Mui-focusVisible': {
     zIndex: 1,
     '& .MuiImageBackdrop-root': {
@@ -38,7 +55,7 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
     '& .MuiTypography-root': {
       border: '4px solid currentColor',
     },
-  },
+  }
 }));
 
 const ImageSrc = styled('span')({

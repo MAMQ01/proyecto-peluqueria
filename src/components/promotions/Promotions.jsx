@@ -16,11 +16,10 @@ const Promotions = ({ products, interval = 3000 }) => {
     <Box
       sx={{
         width: '100%',
-        maxWidth: '744px',
+        maxWidth: {xs: '100%', sm: '500px', md: '550px', lg: '744px'},
         aspectRatio: "4 / 3", // Relación de aspecto fija
         overflow: "hidden",
         position: "relative",
-        borderRadius: 1,
         boxShadow: 3,
         bgcolor: "background.paper",
         display: "flex",
