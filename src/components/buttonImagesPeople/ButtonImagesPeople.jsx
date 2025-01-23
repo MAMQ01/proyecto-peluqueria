@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 
 import hombreImg from '../../img/hombre.jpg';
 import mujerImg from '../../img/mujer.jpg';
+import { Link } from 'react-router-dom';
 
 const images = [
   {
@@ -106,11 +107,13 @@ export default function ButtonImagesPeople() {
     <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 255, width: '100%' }}>
       {images.map((image) => (
         <ImageButton
-          focusRipple
-          key={image.title}
-          style={{
-            width: image.width,
-          }}
+        focusRipple
+        key={image.title}
+        style={{
+          width: image.width,
+        }}
+        component={Link}
+        to={`/${image.title.toLowerCase()}`}
         >
           <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
           <ImageBackdrop className="MuiImageBackdrop-root" />

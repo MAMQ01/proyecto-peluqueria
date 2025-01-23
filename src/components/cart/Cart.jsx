@@ -1,47 +1,35 @@
-
-import { useContext } from 'react'
-import { ContextCart } from '../context/ContextCart'
-import { Button } from '@mui/material';
+// Cart.jsx
+import { useContext } from 'react';
+import { Box, Container, Typography, Divider } from '@mui/material';
+import { ContextCart } from '../context/ContextCart';
+import CartItems from './CartItems';
+import EmptyCart from './CartEmpty';
+import CartSummary from './CartSummary';
 
 const Cart = () => {
-
-  const {
-    cart,
-    clearCart,
-    getSubTotalProductById,
-    getIvaProductById,
-    getTotalProductById,
-    getSubTotalCart,
-    getIvaCart,
-    getTotalCart } = useContext(ContextCart)
+  const { cart } = useContext(ContextCart);
 
   return (
-    <div>
-      {
-        cart.length > 0 ?
-          (<div>
-            {
-              cart.map((product) => (
-                <div key={product.id}>
-                  <h2>{product.name + " " + product.quantity}</h2>
-                  <h3>precio: ${product.price}</h3>
-                  <h3>Subtotal Articul{product.quantity > 1 ? "os" : "o"} ${getSubTotalProductById(product.id)}</h3>
-                  <h3>IVA Articul{product.quantity > 1 ? "os" : "o"} ${getIvaProductById(product.id)}</h3>
-                  <h3>Total Articul{product.quantity > 1 ? "os" : "o"} ${getTotalProductById(product.id)}</h3>
-                  <Button variant='outlined' color='error' onClick={() => clearCart(product.id)}>Quitar</Button>
-                  <hr />
-                </div>
-              ))
-            }
-            <Button color='error' variant='contained' onClick={() => clearCart()}>Vaciar carrito</Button>
-            <h3>IVA Total ${getIvaCart()}</h3>
-            <h3>Subtotal Total ${getSubTotalCart()}</h3>
-            <h3>Total ${getTotalCart()}</h3>
-          </div>) :
-          (<h2>Crear componente carro vacío</h2>)
-      }
-    </div>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
+        Mi Carrito
+      </Typography>
+      
+      {cart.length > 0 ? (
+        <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', md: 'row' } }}>
+          <Box sx={{ flex: '1 1 auto' }}>
+            <CartItems />
+          </Box>
+          <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', md: 'block' } }} />
+          <Box sx={{ width: { xs: '100%', md: '380px' } }}>
+            <CartSummary />
+          </Box>
+        </Box>
+      ) : (
+        <EmptyCart />
+      )}
+    </Container>
   );
+};
 
-}
-export default Cart
+export default Cart;

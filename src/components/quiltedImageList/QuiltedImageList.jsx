@@ -14,10 +14,10 @@ export default function QuiltedImageList() {
     return (
         <ImageList
             sx={{
-                width: '100vh',
+                width: '100%', // Ajusta el ancho a todo el contenedor
+                maxWidth: '1536px', // Opcional: establece un ancho máximo para pantallas grandes
                 height: { xs: 450, md: 600, lg: 978 },
-                ml: { xs: 'auto'},
-                mr: { xs: 'auto'},
+                mx: 'auto', // Centra horizontalmente
             }}
             variant="quilted"
             cols={4}
@@ -64,7 +64,6 @@ const itemData = [
     {
         img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
         title: 'Honey',
-        author: '@arwinneil',
         rows: 2,
         cols: 2,
     },

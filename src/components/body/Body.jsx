@@ -3,7 +3,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid2';
 import Promotions from '../promotions/Promotions';
 import { products } from '../../productsMock';
-import backgroundImage from '../../img/5503.jpg';
+/* import backgroundImage from '../../img/5503.jpg'; */
 import ButtonImagesPeople from '../buttonImagesPeople/ButtonImagesPeople';
 import QuiltedImageList from '../quiltedImageList/QuiltedImageList';
 
@@ -13,7 +13,7 @@ const Body = () => {
             component={"main"}
             sx={{
                 flexGrow: 1,
-                backgroundImage: `url(${backgroundImage})`,
+                /* backgroundImage: `url(${backgroundImage})`    'background.default', */
                 backgroundColor: 'white',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -47,18 +47,17 @@ const Body = () => {
                         size={12}
                         sx={{
                             display: { xs: 'flex', md: 'none' },
-                            gap: 1
                         }}
                     >
                         <Grid size={12}>
                             <Typography
                                 variant="h6"
                                 sx={{
-                                    color: 'rgba(255, 0, 255, 0.5)',
+                                    color: 'primary.main',
                                     textAlign: 'center',
                                     padding: 2,
                                     fontWeight: 'bold',
-                                    backgroundColor: 'rgba(0 , 0, 0, 0.6)'
+                                    backgroundColor: '#F2F1F3'
                                 }}
                             >
                                 POR TIEMPO LIMITADO
@@ -68,12 +67,23 @@ const Body = () => {
                         <Grid size={12}>
                             <ButtonImagesPeople />
                         </Grid>
-                        <Grid size={12}
+                        <Grid
+                            size={12}
                             sx={{
-                                display: { xs: 'flex', md: 'none' },
-                            }}>
-                            <QuiltedImageList />
+                                width: '100%', // Asegura que ocupe el ancho completo
+                                display: 'flex',
+                                justifyContent: 'center', // Centra el contenido horizontalmente si es necesario
+                                alignItems: 'center', // Centra verticalmente si es necesario
+                                padding: { xs: 0, md: 2 }, // Espaciado opcional
+                            }}
+                        >
+                            <QuiltedImageList
+                                sx={{
+                                    width: '100%', // Asegura que se ajuste al contenedor padre
+                                }}
+                            />
                         </Grid>
+
                     </Grid>
                     <Grid
                         container
@@ -82,21 +92,6 @@ const Body = () => {
                             display: { xs: 'none', md: 'flex' },
                         }}
                     >
-                        {/* <Grid size={6}>
-                            <Typography
-                                variant="h6"
-                                sx={{
-                                    color: 'rgba(255, 0, 255, 0.5)',
-                                    textAlign: 'center',
-                                    padding: 2,
-                                    fontWeight: 'bold',
-                                    backgroundColor: 'rgba(0 , 0, 0, 0.6)'
-                                }}
-                            >
-                                POR TIEMPO LIMITADO
-                            </Typography>
-                            <Promotions products={products} interval={5000} />
-                        </Grid> */}
                     </Grid>
                 </Grid>
                 <Grid size={6}
