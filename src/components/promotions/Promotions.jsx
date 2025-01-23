@@ -45,15 +45,15 @@ const Promotions = ({ products, interval = 3000 }) => {
           bottom: 0,
           left: 0,
           width: "100%",
-          bgcolor: "rgba(0, 0, 0, 0.40)", // Fondo oscuro semitransparente
-          color: "white",
+          bgcolor: "primary.main", // Fondo oscuro semitransparente
+          color: "background.default",
           p: 1,
         }}
       >
         <Typography variant="body1" fontWeight={600}>
           {products[currentIndex].name}
         </Typography>
-        <Typography variant="body2" fontWeight="bold" color="secondary">
+        <Typography variant="body2" fontWeight="bold" color="background.default">
           ${products[currentIndex].price}
         </Typography>
       </Box>
@@ -64,8 +64,8 @@ const Promotions = ({ products, interval = 3000 }) => {
           position: "absolute",
           top: 8,
           left: 8,
-          bgcolor: "secondary.main",
-          color: "white",
+          bgcolor: "primary.main",
+          color: "background.default",
           fontWeight: 600,
         }}
       />

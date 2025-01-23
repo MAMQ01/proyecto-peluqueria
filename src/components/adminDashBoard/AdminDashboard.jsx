@@ -15,7 +15,7 @@ import { collection, getDocs, query, where, updateDoc, addDoc, deleteDoc } from 
 import { db } from "../../firebase/firebaseConfig"; // Asegúrate de que esta ruta sea correcta
 import { products } from "../../productsMock"; // Importa tu array de productos local
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ onLogout }) => {
     const [newProduct, setNewProduct] = useState({
         name: "",
         price: 0,
@@ -23,7 +23,8 @@ const AdminDashboard = () => {
         description: "",
         image: "",
         stock: 0,
-        sex: "",
+        sexo: "",
+        duration: 0,
     });
     const [deleteProductName, setDeleteProductName] = useState("");
 
@@ -81,7 +82,8 @@ const AdminDashboard = () => {
                 description: "",
                 image: "",
                 stock: 0,
-                sex: "",
+                sexo: "",
+                duration: 0,
             });
         } catch (error) {
             console.error("Error al añadir producto:", error);
@@ -112,19 +114,21 @@ const AdminDashboard = () => {
 
     return (
         <Box sx={{ padding: "20px" }}>
+            <Button variant="outlined" onClick={onLogout} sx={{my: 2}}>
+                Cerrar Sesión
+            </Button>
             <Typography variant="h4" gutterBottom>
                 Admin Dashboard
             </Typography>
-
             {/* Botones de acciones generales */}
             <Grid container spacing={2} sx={{ marginBottom: "20px" }}>
-                <Grid size={{xs : 12, sm : 6}}>
-                    <Button variant="contained" color="primary" fullWidth onClick={handleUpdateProducts}>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                    <Button variant="contained" color="success" fullWidth onClick={handleUpdateProducts}>
                         Actualizar Productos
                     </Button>
                 </Grid>
-                <Grid size={{xs : 12, sm : 6}}>
-                    <Button variant="contained" color="secondary" fullWidth onClick={handleClearCollection}>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                    <Button variant="contained" color="error" fullWidth onClick={handleClearCollection}>
                         Eliminarlos todos
                     </Button>
                 </Grid>
@@ -136,7 +140,7 @@ const AdminDashboard = () => {
                     Añadir Nuevo Producto
                 </Typography>
                 <Grid container spacing={2}>
-                    <Grid size={{xs : 12, sm : 6}}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <TextField
                             label="Nombre"
                             fullWidth
@@ -145,7 +149,7 @@ const AdminDashboard = () => {
                             required
                         />
                     </Grid>
-                    <Grid size={{xs : 12, sm : 6}}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <TextField
                             label="Precio"
                             type="number"
@@ -155,22 +159,32 @@ const AdminDashboard = () => {
                             required
                         />
                     </Grid>
-                    <Grid size={{xs : 12, sm : 6}}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <TextField
                             label="Categoría"
                             fullWidth
                             value={newProduct.category}
-                            onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                            onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value.toLowerCase() })}
                             required
                         />
                     </Grid>
-                    <Grid size={{xs : 12, sm : 6}}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <TextField
                             label="Stock"
                             type="number"
                             fullWidth
                             value={newProduct.stock}
                             onChange={(e) => setNewProduct({ ...newProduct, stock: parseInt(e.target.value) })}
+                            required
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                        <TextField
+                            label="Duración"
+                            type="number"
+                            fullWidth
+                            value={newProduct.duration}
+                            onChange={(e) => setNewProduct({ ...newProduct, duration: parseInt(e.target.value) })}
                             required
                         />
                     </Grid>
@@ -197,8 +211,8 @@ const AdminDashboard = () => {
                         <FormControl fullWidth required>
                             <InputLabel>Sexo</InputLabel>
                             <Select
-                                value={newProduct.sex}
-                                onChange={(e) => setNewProduct({ ...newProduct, sex: e.target.value })}
+                                value={newProduct.sexo}
+                                onChange={(e) => setNewProduct({ ...newProduct, sexo: e.target.value })}
                                 label="Sexo"
                                 required
                             >
@@ -222,7 +236,7 @@ const AdminDashboard = () => {
                     Eliminar Producto
                 </Typography>
                 <Grid container spacing={2}>
-                    <Grid size={{xs : 12, sm : 8}}>
+                    <Grid size={{ xs: 12, sm: 8 }}>
                         <TextField
                             label="Nombre del Producto a Eliminar"
                             fullWidth
@@ -231,7 +245,7 @@ const AdminDashboard = () => {
                             required
                         />
                     </Grid>
-                    <Grid size={{xs : 12, sm : 4}}>
+                    <Grid size={{ xs: 12, sm: 4 }}>
                         <Button variant="contained" color="error" fullWidth onClick={handleDeleteProduct}>
                             Eliminar Producto
                         </Button>

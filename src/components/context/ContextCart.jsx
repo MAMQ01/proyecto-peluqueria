@@ -1,11 +1,58 @@
 
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
+import { getDocs, collection } from "firebase/firestore"
+import { db } from "../../firebase/firebaseConfig"
 
 export const ContextCart = createContext()
 
 const ContextCartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([])
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            setLoading(true)
+            const itemCollection = collection(db, "products")
+            try {
+                const querySnapshot = await getDocs(itemCollection)
+                const productsData = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+                setProducts(productsData)
+            } catch (error) {
+                console.error("Error fetching products:", error)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchProducts()
+    }, [])
+
+    const getFilteredProducts = (categoryName, sexo) => {
+        // Si no hay filtros, devuelve todos los productos
+        if (!categoryName && !sexo) {
+            return products;
+        }
+    
+        // Si solo hay categoría
+        if (categoryName && !sexo) {
+            return products.filter(product => product.category === categoryName);
+        }
+    
+        // Si solo hay sexo
+        if (!categoryName && sexo) {
+            return products.filter(product => product.sexo === sexo);
+        }
+    
+        // Si hay ambos filtros
+        return products.filter(product => 
+            product.category === categoryName && product.sexo === sexo
+        );
+    };
 
     const addToCart = (element) => {
         if (cart.some((itemCart) => itemCart.id === element.id)) {
@@ -80,7 +127,10 @@ const ContextCartProvider = ({ children }) => {
         getTotalProductById,
         getSubTotalCart,
         getIvaCart,
-        getTotalCart
+        getTotalCart,
+        products,
+        loading,
+        getFilteredProducts
     }
 
     return (

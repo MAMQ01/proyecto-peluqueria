@@ -12,7 +12,7 @@ import ContentCutIcon from '@mui/icons-material/ContentCut';
 import { Link } from 'react-router-dom';
 import CartWidget from '../cartWidget/CartWidget';
 
-const pages = ['pestanyas', 'unyas', 'cabello'];
+const pages = ['pestañas', 'uñas', 'cabello'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -54,7 +54,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              JOHANAIL'S
             </Typography>
           </Box>
 
@@ -119,13 +119,13 @@ function Navbar() {
               noWrap
               sx={{
                 fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
+                fontWeight: 600,
+                letterSpacing: '.15rem',
                 color: 'inherit',
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              JOHANAIL'S
             </Typography>
           </Box>
 
